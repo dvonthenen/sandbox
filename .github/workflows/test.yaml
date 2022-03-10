@@ -1,0 +1,29 @@
+name: test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-workflow:
+    name: Test Workflow
+    steps:
+      - name: Display the path
+        run: echo ${env:PATH}
+        shell: powershell
+      - name: Config credentials
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
+        shell: powershell
+        run: |
+          git config --global pull.rebase true
+          git config --global url."https://git:$GITHUB_TOKEN@github.com".insteadOf "https://github.com"
+      - name: Build
+        shell: powershell
+        run: |
+          git checkout main
+          git reset --hard
+          git checkout -b mytest
+          "test" | Out-File -FilePath test.txt
+          git add -A
+          git commit -s -m "test"
+          git push origin "my-test-branch"
