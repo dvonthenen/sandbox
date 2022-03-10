@@ -6,6 +6,7 @@ on:
 jobs:
   test-workflow:
     name: Test Workflow
+    runs-on: windows-latest
     steps:
       - name: Display the path
         run: echo ${env:PATH}
