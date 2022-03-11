@@ -11,6 +11,8 @@ jobs:
       - name: Display the path
         run: echo ${env:PATH}
         shell: powershell
+      - name: Check out code
+        uses: actions/checkout@v1
       - name: Config credentials
         env:
           GITHUB_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
