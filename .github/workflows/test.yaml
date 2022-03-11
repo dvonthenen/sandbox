@@ -25,11 +25,10 @@ jobs:
       - name: Build
         shell: powershell
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
           GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
         run: |
-          git config --global pull.rebase true
-          git config --global url."https://dvonthenen:$GITHUB_TOKEN@github.com".insteadOf "https://github.com"
+          git config --global credential.helper store
+          Set-Content -Path "$HOME\.git-credentials" -Value "https://$GH_TOKEN:x-oauth-basic@github.com`n" -NoNewline
           git config user.name dvonthenen
           git config user.email davidvonthenen@gmail.com
           gh auth login
