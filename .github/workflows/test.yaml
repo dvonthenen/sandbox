@@ -19,7 +19,7 @@ jobs:
         shell: powershell
         run: |
           git config --global pull.rebase true
-          git config --global url."https://git:$GITHUB_TOKEN@github.com".insteadOf "https://github.com"
+          git config --global url."https://dvonthenen:$GITHUB_TOKEN@github.com".insteadOf "https://github.com"
           git config user.name dvonthenen
           git config user.email davidvonthenen@gmail.com
       - name: Build
