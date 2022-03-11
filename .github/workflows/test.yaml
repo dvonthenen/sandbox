@@ -31,4 +31,4 @@ jobs:
           "test" | Out-File -FilePath test.txt
           git add -A
           git commit -s -m "test"
-          git push origin "my-test-branch"
+          git push origin "mytest"
