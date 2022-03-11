@@ -13,20 +13,25 @@ jobs:
         shell: powershell
       - name: Check out code
         uses: actions/checkout@v1
-      - name: Config credentials
+      # - name: Config credentials
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
+      #   shell: powershell
+      #   run: |
+      #     git config --global pull.rebase true
+      #     git config --global url."https://dvonthenen:$GITHUB_TOKEN@github.com".insteadOf "https://github.com"
+      #     git config user.name dvonthenen
+      #     git config user.email davidvonthenen@gmail.com
+      - name: Build
+        shell: powershell
         env:
           GITHUB_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
-        shell: powershell
+          GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
         run: |
           git config --global pull.rebase true
           git config --global url."https://dvonthenen:$GITHUB_TOKEN@github.com".insteadOf "https://github.com"
           git config user.name dvonthenen
           git config user.email davidvonthenen@gmail.com
-      - name: Build
-        shell: powershell
-        env:
-          GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
-        run: |
           gh auth login
           git checkout main
           git reset --hard
@@ -34,5 +39,6 @@ jobs:
           "test" | Out-File -FilePath test.txt
           git add -A
           git commit -s -m "test"
+          git push mytest
           gh pr create --title "auto-generated - test" --body "auto-generated - test" --base "main"
           gh pr merge "automation-test" --delete-branch --squash --admin
