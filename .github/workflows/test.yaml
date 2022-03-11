@@ -22,14 +22,15 @@ jobs:
       #     git config --global url."https://dvonthenen:$GITHUB_TOKEN@github.com".insteadOf "https://github.com"
       #     git config user.name dvonthenen
       #     git config user.email davidvonthenen@gmail.com
+      #
+          # [Environment]::SetEnvironmentVariable("GITHUB_TOKEN",$null,"User")
+          # git config --global credential.https://github.com.helper ''
+          # git config --global 'credential.https://github.com' '!gh auth git-credential'
       - name: Build
         shell: powershell
         env:
           GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
         run: |
-          [Environment]::SetEnvironmentVariable("GITHUB_TOKEN",$null,"User")
-          git config --global credential.https://github.com.helper ''
-          git config --global 'credential.https://github.com' '!gh auth git-credential'
           git config --global credential.helper store
           Set-Content -Path "$HOME\.git-credentials" -Value "https://$GH_TOKEN:x-oauth-basic@github.com`n" -NoNewline
           git config user.name dvonthenen
