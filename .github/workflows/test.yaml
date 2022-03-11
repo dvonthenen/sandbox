@@ -27,6 +27,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
         run: |
+          gh auth login
           git checkout main
           git reset --hard
           git checkout -b mytest
