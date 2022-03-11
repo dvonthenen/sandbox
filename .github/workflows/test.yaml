@@ -25,9 +25,9 @@ jobs:
       - name: Build
         shell: powershell
         env:
-          GITHUB_TOKEN: ""
           GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
         run: |
+          setx GITHUB_TOKEN ""
           git config --global credential.https://github.com.helper ''
           git config --global 'credential.https://github.com' '!gh auth git-credential'
           git config --global credential.helper store
