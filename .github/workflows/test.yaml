@@ -34,5 +34,5 @@ jobs:
           "test" | Out-File -FilePath test.txt
           git add -A
           git commit -s -m "test"
-          gh pr create --title "auto-generated - test" --body "auto-generated - test" --base "main" --head "mytest"
+          gh pr create --title "auto-generated - test" --body "auto-generated - test" --base "main"
           gh pr merge "automation-test" --delete-branch --squash --admin
