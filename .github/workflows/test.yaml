@@ -24,6 +24,8 @@ jobs:
           git config user.email davidvonthenen@gmail.com
       - name: Build
         shell: powershell
+        env:
+          GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
         run: |
           git checkout main
           git reset --hard
@@ -31,4 +33,5 @@ jobs:
           "test" | Out-File -FilePath test.txt
           git add -A
           git commit -s -m "test"
-          git push origin "mytest"
+          gh pr create --title "auto-generated - test" --body "auto-generated - test" --base "main" --head "mytest"
+          gh pr merge "automation-test" --delete-branch --squash --admin
