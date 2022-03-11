@@ -27,7 +27,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.MY_ACCESS_TOKEN }}
         run: |
-          Remove-Item Env:\GITHUB_TOKEN
           git config --global credential.https://github.com.helper ''
           git config --global 'credential.https://github.com' '!gh auth git-credential'
           git config --global credential.helper store
